@@ -16,6 +16,17 @@ bs_a2r = EpicsMotor('BL14B:Mot:a2r', name='bs_a2r')
 bs_a2b = EpicsMotor('BL14B:Mot:a2b', name='bs_a2b')
 
 # Sample (table) Z rotation
-
 bs_s1 = EpicsMotor('BL14B:Mot:s1', name='bs_s1')
-bs_s2 = EpicsMotor('BL14B:Mot:s2', name='bs_s2')
+
+# Sample translation upper (y), lower (x)
+bs_stu = EpicsMotor('BL14B:Mot:stu', name='bs_stu)
+bs_stl = EpicsMotor('BL14B:Mot:stl', name='bs_stl)
+
+# Sample goniometer upper (y), lower (x) tilt
+bs_sgu = EpicsMotor('BL14B:Mot:sgu', name='bs_sgu)
+bs_sgl = EpicsMotor('BL14B:Mot:sgl', name='bs_sgl)
+
+# Sample Axes (stick on sample environment, etc)
+bs_axis1 = EpicsMotor('BL14B:Mot:Axis1', name='bs_Axis1)
+bs_axis2 = EpicsMotor('BL14B:Mot:Axis2', name='bs_Axis2)                      
+ 

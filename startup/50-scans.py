@@ -7,7 +7,7 @@ def waitfor_proton_charge(threshold):
         print("LOOP %d" % i)
         yield from trigger(bs_pcharge, wait=True)
         current_pcharge = yield from read(bs_pcharge)
-        if reading['bs_pcharge']['value'] < threshold:
+        if current_pcharge['bs_pcharge']['value'] < threshold:
             print('DONE')
             break
         i += 1

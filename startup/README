@@ -12,7 +12,7 @@ with a prefix, e.g.::
 
 For ophyd we use the follwoing:
 
-00 : Setup
-10 : Motors
-20 : Detectors
-50 : Scans
+    00 : Setup
+    10 : Motors
+    20 : Detectors
+    50 : Scans

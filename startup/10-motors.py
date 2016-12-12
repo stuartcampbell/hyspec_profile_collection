@@ -2,6 +2,10 @@ from ophyd import (PVPositioner, EpicsMotor, EpicsSignal, EpicsSignalRO,
                    PVPositionerPC, Device)
 from ophyd import Component as Cpt
 
+# Generic phi,chi,omega (move to point to relevent axis)
+bs_phi = EpicsMotor('BL14B:Mot:phi', name='bs_phi')
+bs_chi = EpicsMotor('BL14B:Mot:chi', name='bs_chi')
+bs_omega = EpicsMotor('BL14B:Mot:omega', name='bs_omega')
 
 # Aperture 1 left/top/right/bottom
 bs_a1l = EpicsMotor('BL14B:Mot:a1l', name='bs_a1l')

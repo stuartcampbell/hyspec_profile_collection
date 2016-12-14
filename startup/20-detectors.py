@@ -2,7 +2,7 @@ from ophyd import (EpicsScaler, EpicsSignal, EpicsSignalRO,
                    Device, DeviceStatus)
 from ophyd import Component as Cpt
 
-from bluesky.examples import NullStatus
+import time
 
 class NeutronDetector(Device):
     runcontrol_start = Cpt(EpicsSignal, ':CS:RunControl:Start')
@@ -24,17 +24,19 @@ class NeutronDetector(Device):
         print('kickoff', self.name)
         status = DeviceStatus(self)
 
+        enums = self.runcontrol_stateenum.enum_strs
+        def inner_cb(value, old_value, **kwargs):
+            old_value, value = enums[int(old_value)], enums[int(value)]
+            print('kickoff:', old_value, value, time.time())
+            if value == "Run":
+                status._finished(success=True)
+                self.runcontrol_stateenum.clear_sub(inner_cb)
+
+        self.runcontrol_stateenum.subscribe(inner_cb)
+
         # Callback will not work with simulation run control
         self.runcontrol_start.put(1)
         #self.start_cmd.put(1,wait=True)
-
-        def inner_cb(value, old_value, **kwargs):
-            old_value, value = enums[]
-            if value == "Running":
-                status._finished(success=True)
-        # For the moment just say we have finished.
-        status._finished(success=True)
-        #status = NullStatus()
 
         return status
 
@@ -44,7 +46,20 @@ class NeutronDetector(Device):
         self.runcontrol_stop.put(1)
         #self.stop_cmd.put(1,wait=True)
         status = DeviceStatus(self)
-        #status = NullStatus()
+        enums = self.runcontrol_stateenum.enum_strs
+        def inner_cb(value, old_value, **kwargs):
+            old_value, value = enums[int(old_value)], enums[int(value)]
+            print('complete:', kwargs['timestamp'], old_value, value, value == 'Idle')
+            if value == "Idle":
+                status._finished(success=True)
+                self.runcontrol_stateenum.clear_sub(inner_cb)
+
+        self.runcontrol_stateenum.subscribe(inner_cb)
+
+        # Callback will not work with simulation run control
+        self.runcontrol_stop.put(1)
+        #self.start_cmd.put(1,wait=True)
+
         return status
 
     def pause(self):

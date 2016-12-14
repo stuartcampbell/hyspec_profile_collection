@@ -1,5 +1,6 @@
 from bluesky.plans import abs_set, trigger, read
 
+@bluesky.run_decorator(plan_name='waitfor_proton_charge')
 def waitfor_proton_charge(threshold):
     """Set, trigger, read until the current reaches threshold"""
     i = 0

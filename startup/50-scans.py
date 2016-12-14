@@ -1,7 +1,7 @@
 import bluesky.plans as bp
 from bluesky.plans import abs_set, trigger, read, run_decorator
 
-@run_decorator(plan_name='waitfor_proton_charge')
+@run_decorator()
 def waitfor_proton_charge(threshold):
     """Set, trigger, read until the current reaches threshold"""
     i = 0
@@ -14,7 +14,7 @@ def waitfor_proton_charge(threshold):
             break
         i += 1
 
-@run_decorator(plan_name='pump_plan')
+@run_decorator()
 def time_plan(collection_time):
     yield from bp.kickoff(adara_detector, wait=True)
     yield from bp.sleep(collection_time)

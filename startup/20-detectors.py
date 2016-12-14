@@ -18,19 +18,20 @@ class NeutronDetector(Device):
 
 
     def kickoff(self):
-
+        print('kickoff', self.name)
         # Callback will not work with simulation run control
         self.start_cmd.put(1)
         #self.start_cmd.put(1,wait=True)
-        status = DeviceStatus(self)
-        return status
+        #status = DeviceStatus(self)
+        return NullStatus()
 
     def complete(self):
+        print('complete', self.name)
         # Callback will not work with simulation run control
         self.stop_cmd.put(1)
         #self.stop_cmd.put(1,wait=True)
-        status = DeviceStatus(self)
-        return status
+        #status = DeviceStatus(self)
+        return NullStatus()
 
     def pause(self):
         # Callback will not work with simulation run control

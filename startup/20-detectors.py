@@ -9,17 +9,26 @@ class NeutronDetector(Device):
     pause_cmd = Cpt(EpicsSignal, ':CS:RunControl:Pause')
     stop_cmd = Cpt(EpicsSignal, ':CS:RunControl:Stop')
 
+    def stage(self):
+        self._full_path = "UNKNOWN"
+
+    def unstage(self):
+
+
     def kickoff(self):
 
+        # Callback will not work with simulation run control
+        self.start_cmd.put(1)
+        #self.start_cmd.put(1,wait=True)
+        status = DeviceStatus(self)
+        return status
+
+    def complete(self):
         # Callback will not work with simulation run control
         self.stop_cmd.put(1)
         #self.stop_cmd.put(1,wait=True)
         status = DeviceStatus(self)
         return status
-
-    def complete(self):
-        status = DeviceStatus(self)
-        return NullStatus
 
     def pause(self):
         # Callback will not work with simulation run control

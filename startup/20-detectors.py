@@ -11,8 +11,10 @@ class NeutronDetector(Device):
 
     def stage(self):
         self._full_path = "UNKNOWN"
+        return super().stage()
 
     def unstage(self):
+        return super().unstage()
 
 
     def kickoff(self):

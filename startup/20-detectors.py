@@ -5,9 +5,9 @@ from ophyd import Component as Cpt
 from bluesky.examples import NullStatus
 
 class NeutronDetector(Device):
-    start_cmd = Cpt(EpicsSignal, ':CS:RunControl:Start')
-    pause_cmd = Cpt(EpicsSignal, ':CS:RunControl:Pause')
-    stop_cmd = Cpt(EpicsSignal, ':CS:RunControl:Stop')
+    start_cmd = Cpt(EpicsSignal, ':Start')
+    pause_cmd = Cpt(EpicsSignal, ':Pause')
+    stop_cmd = Cpt(EpicsSignal, ':Stop')
 
     def stage(self):
         self._full_path = "UNKNOWN"
@@ -22,16 +22,18 @@ class NeutronDetector(Device):
         # Callback will not work with simulation run control
         self.start_cmd.put(1)
         #self.start_cmd.put(1,wait=True)
-        #status = DeviceStatus(self)
-        return NullStatus()
+        status = DeviceStatus(self)
+        #status = NullStatus()
+        return status
 
     def complete(self):
         print('complete', self.name)
         # Callback will not work with simulation run control
         self.stop_cmd.put(1)
         #self.stop_cmd.put(1,wait=True)
-        #status = DeviceStatus(self)
-        return NullStatus()
+        status = DeviceStatus(self)
+        #status = NullStatus()
+        return status
 
     def pause(self):
         # Callback will not work with simulation run control
@@ -48,7 +50,7 @@ class NeutronDetector(Device):
         self.stop_cmd.put(1)
         #self.stop_cmd.put(1,wait=True)
 
-adara_detector = NeutronDetector('BL99', name='adara_detector')
+detector = NeutronDetector('BL99:CS:RunControl', name='detector')
 
 # integrated proton charge for the run
 bs_pcharge = EpicsSignalRO('BL14B:Det:N1:PChargeIntegrated_RBV', name='bs_pcharge')

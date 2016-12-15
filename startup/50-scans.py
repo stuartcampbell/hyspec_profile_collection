@@ -20,3 +20,10 @@ def time_plan(collection_time):
     yield from bp.sleep(collection_time)
     yield from bp.complete(adara_detector, wait=True)
     # yield from bp.collect(adara_detector)  # they don't actually do this step, but you should
+
+@run_decorator()
+def pcharge_plan(pcharge):
+    yield from bp.kickoff(adara_detector, wait=True)
+    yield from waitfor_proton_charge(pcharge)
+    yield from bp.complete(adara_detector, wait=True)
+    # yield from bp.collect(adara_detector)  # they don't actually do this step, but you should

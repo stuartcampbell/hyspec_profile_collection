@@ -16,14 +16,16 @@ def waitfor_proton_charge(threshold):
 
 @run_decorator()
 def time_plan(collection_time):
-    yield from bp.kickoff(adara_detector, wait=True)
+    '''Plan to collect for a period of time'''
+    yield from bp.kickoff(detector, wait=True)
     yield from bp.sleep(collection_time)
-    yield from bp.complete(adara_detector, wait=True)
-    # yield from bp.collect(adara_detector)  # they don't actually do this step, but you should
+    yield from bp.complete(detector, wait=True)
+    # yield from bp.collect(detector)  # they don't actually do this step, but you should
 
 @run_decorator()
 def pcharge_plan(pcharge):
-    yield from bp.kickoff(adara_detector, wait=True)
+    '''Plan to collection for a given beam current'''
+    yield from bp.kickoff(detector, wait=True)
     yield from waitfor_proton_charge(pcharge)
-    yield from bp.complete(adara_detector, wait=True)
-    # yield from bp.collect(adara_detector)  # they don't actually do this step, but you should
+    yield from bp.complete(etector, wait=True)
+    # yield from bp.collect(detector)  # they don't actually do this step, but you should

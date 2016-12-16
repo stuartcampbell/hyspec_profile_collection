@@ -20,7 +20,7 @@ def time_plan(collection_time):
     yield from bp.kickoff(detector, wait=True)
     yield from bp.sleep(collection_time)
     yield from bp.complete(detector, wait=True)
-    # yield from bp.collect(detector)  # they don't actually do this step, but you should
+    yield from bp.collect(detector)  
 
 @run_decorator()
 def pcharge_plan(pcharge):
@@ -28,7 +28,7 @@ def pcharge_plan(pcharge):
     yield from bp.kickoff(detector, wait=True)
     yield from waitfor_proton_charge(pcharge)
     yield from bp.complete(etector, wait=True)
-    # yield from bp.collect(detector)  # they don't actually do this step, but you should
+    yield from bp.collect(detector)
 
 @run_decorator()
 def step_scan(mymotor, motor_min, motor_max, motor_step, collection_time):
@@ -54,3 +54,4 @@ def continuous_step_scan(mymotor, motor_min, motor_max, motor_step, collection_t
         yield from bp.pause(detector, wait=True)
 
     yield from bp.complete(detector, wait=True)
+    yield from bp.collect(detector)

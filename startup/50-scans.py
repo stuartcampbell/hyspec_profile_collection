@@ -29,3 +29,28 @@ def pcharge_plan(pcharge):
     yield from waitfor_proton_charge(pcharge)
     yield from bp.complete(etector, wait=True)
     # yield from bp.collect(detector)  # they don't actually do this step, but you should
+
+@run_decorator()
+def step_scan(mymotor, motor_min, motor_max, motor_step, collection_time):
+    "Step mymotor from min -> max with a step size of step and collect for a given time"
+    for num in range(motor_min, motor_max, motor_step):
+        yield from abs_set(mymotor, num, wait=True)
+        yield from time_plan(collection_time)
+
+@run_decorator()
+def continuous_step_scan(mymotor, motor_min, motor_max, motor_step, collection_time):
+    "Step mymotor, produce a single file."
+    # Move to start position
+    yield from abs_set(mymotor, motor_min, wait=True)
+    # Start
+    yield from bp.kickoff(detector, wait=True)
+    # and immediately pause
+    yield from bp.pause(detector, wait=True)
+
+    for num in range(motor_min, motor_max, motor_step):
+        yield from abs_set(mymotor, num, wait=True)
+        yield from bp.resume(detector, wait=True)
+        yield from bp.sleep(collection_time)
+        yield from bp.pause(detector, wait=True)
+
+    yield from bp.complete(detector, wait=True)

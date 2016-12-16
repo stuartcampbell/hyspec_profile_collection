@@ -8,8 +8,8 @@ class NeutronDetector(Device):
     runcontrol_start = Cpt(EpicsSignal, ':CS:RunControl:Start')
     runcontrol_pause = Cpt(EpicsSignal, ':CS:RunControl:Pause')
     runcontrol_stop = Cpt(EpicsSignal, ':CS:RunControl:Stop')
-    runcontrol_message = Cpt(EpicsSignal, ':CS:RunControl:Message')
-    runcontrol_state = Cpt(EpicsSignal, ':CS:RunControl:State')
+    #runcontrol_message = Cpt(EpicsSignal, ':CS:RunControl:Message')
+    #runcontrol_state = Cpt(EpicsSignal, ':CS:RunControl:State')
     runcontrol_stateenum = Cpt(EpicsSignal, ':CS:RunControl:StateEnum')
 
     def stage(self):

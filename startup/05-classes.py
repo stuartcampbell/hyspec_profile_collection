@@ -29,12 +29,17 @@ def adjustErrbarxy(self, errobj, x, y, x_error, y_error):
 
 class LivePlotWithErrors(LivePlot):
 
+    def __init__(self, y, x=None, *, legend_keys=None, xlim=None, ylim=None,
+                 ax=None, fig=None, **kwargs):
+        super().__init__(y, x=None, *, legend_keys=None, xlim=None, ylim=None,
+                     ax=None, fig=None, **kwargs)
+
     def start(self, doc):
         self.x_data, self.y_data, self.e_data = [], [], []
         label = " :: ".join(
             [str(doc.get(name, name)) for name in self.legend_keys])
         kwargs = ChainMap(self.kwargs, {'label': label})
-        self.current_line, = self.ax.errorbar([], [], yerr=[], **kwargs)
+        self.current_line = self.ax.errorbar([], [], yerr=[], **kwargs)
         self.lines.append(self.current_line)
         self.legend = self.ax.legend(
             loc=0, title=self.legend_title).draggable()

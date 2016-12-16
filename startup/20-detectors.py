@@ -4,6 +4,7 @@ from ophyd import Component as Cpt
 
 import time
 
+
 class NeutronDetector(Device):
     runcontrol_start = Cpt(EpicsSignal, ':CS:RunControl:Start')
     runcontrol_pause = Cpt(EpicsSignal, ':CS:RunControl:Pause')
@@ -68,6 +69,22 @@ class NeutronDetector(Device):
         # Callback will not work with simulation run control
         self.runcontrol_stop.put(1)
         #self.stop_cmd.put(1,wait=True)
+
+    def collect(self):
+        yield {'time': time.time(),
+               'data': {'filename': 'FILENAMEHERE'},
+               'timestamps': {'filename': time.time()}}
+
+    def describe_collect(self):
+        return {'detector': {
+            'filename': {
+                'dtype': 'string',
+                'source': 'CONSTRUCTED',
+                'shape': []
+                }
+            }
+        }
+
 
 detector = NeutronDetector('BL99', name='detector')
 

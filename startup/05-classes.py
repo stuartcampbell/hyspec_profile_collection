@@ -31,39 +31,7 @@ class LivePlotWithErrors(LivePlot):
 
     def __init__(self, y, x=None, *, legend_keys=None, xlim=None, ylim=None,
                  ax=None, fig=None, **kwargs):
-        super().__init__()
-        if fig is not None:
-            if ax is not None:
-                raise ValueError("Values were given for both `fig` and `ax`. "
-                                 "Only one can be used; prefer ax.")
-            warnings.warn("The `fig` keyword arugment of LivePlot is "
-                          "deprecated and will be removed in the future. "
-                          "Instead, use the new keyword argument `ax` to "
-                          "provide specific Axes to plot on.")
-            ax = fig.gca()
-        if ax is None:
-            fig, ax = plt.subplots()
-        self.ax = ax
-
-        if legend_keys is None:
-            legend_keys = []
-        self.legend_keys = ['scan_id'] + legend_keys
-        if x is not None:
-            self.x, *others = _get_obj_fields([x])
-        else:
-            self.x = None
-        self.y, *others = _get_obj_fields([y])
-        self.ax.set_ylabel(y)
-        self.ax.set_xlabel(x or 'sequence #')
-        if xlim is not None:
-            self.ax.set_xlim(*xlim)
-        if ylim is not None:
-            self.ax.set_ylim(*ylim)
-        self.ax.margins(.1)
-        self.kwargs = kwargs
-        self.lines = []
-        self.legend = None
-        self.legend_title = " :: ".join([name for name in self.legend_keys])
+        super().__init__(y, **kwargs)
 
     def start(self, doc):
         self.x_data, self.y_data, self.e_data = [], [], []

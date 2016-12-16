@@ -20,7 +20,7 @@ def time_plan(collection_time):
     yield from bp.kickoff(detector, wait=True)
     yield from bp.sleep(collection_time)
     yield from bp.complete(detector, wait=True)
-    yield from bp.collect(detector)  
+    yield from bp.collect(detector)
 
 @run_decorator()
 def pcharge_plan(pcharge):
@@ -49,6 +49,7 @@ def continuous_step_scan(mymotor, motor_min, motor_max, motor_step, collection_t
 
     for num in range(motor_min, motor_max, motor_step):
         yield from abs_set(mymotor, num, wait=True)
+        yield from abs_set(bs_adned_reset_counters, 1, wait=True)
         yield from bp.resume(detector, wait=True)
         yield from bp.sleep(collection_time)
         yield from bp.pause(detector, wait=True)

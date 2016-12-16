@@ -12,14 +12,6 @@ class NeutronDetector(Device):
     #runcontrol_state = Cpt(EpicsSignal, ':CS:RunControl:State')
     runcontrol_stateenum = Cpt(EpicsSignal, ':CS:RunControl:StateEnum')
 
-    def stage(self):
-        self._full_path = "UNKNOWN"
-        return super().stage()
-
-    def unstage(self):
-        return super().unstage()
-
-
     def kickoff(self):
         print('kickoff', self.name)
         status = DeviceStatus(self)

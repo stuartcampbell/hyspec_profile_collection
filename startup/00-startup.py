@@ -25,7 +25,7 @@ fs_config = {'host': 'localhost',
              'database': 'filestore-production-v1'}
 mds = MDS(mds_config)
 #mds_readonly = MDSRO(mds_config)
-# As we aren't writing any files at the moment, use 
+# As we aren't writing any files at the moment, use
 # the readonly version
 fs_readonly = FileStoreRO(fs_config)
 
@@ -57,17 +57,3 @@ from time import sleep
 import numpy as np
 
 RE = gs.RE  # convenience alias
-
-# Set up default metadata
-
-RE.md['beamline_id'] = 'HYSPEC'
-RE.md['proposal_id'] = None
-
-# Add a callback that prints scan IDs at the start of each scan.
-def print_scan_ids(name, start_doc):
-    print("Transient Scan ID: {0}".format(start_doc['scan_id']))
-    print("Persistent Unique Scan ID: '{0}'".format(start_doc['uid']))
-
-gs.RE.subscribe('start', print_scan_ids)
-
-

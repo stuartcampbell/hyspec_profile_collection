@@ -135,7 +135,31 @@ class LivePlotWithErrors(CallbackBase):
 
     def update_plot(self):
         # self.current_line.set_data(self.x_data, self.y_data)
-        adjustErrbarY(self.current_line, self.x_data, self.y_data, self.e_data)
+        #adjustErrbarY(self.current_line, self.x_data, self.y_data, self.e_data)
+
+        ln, (errx_top, errx_bot, erry_top, erry_bot), (barsx, barsy) = self.current_line
+        yerr_top = self.y_data + self.e_data
+        yerr_bot = self.y_data - self.e_data
+
+        erry_top.set_xdata(self.x_data)
+        erry_bot.set_xdata(self.x_data)
+        erry_top.set_ydata(yerr_top)
+        erry_bot.set_ydata(yerr_bot)
+
+        errx_top.set_xdata(self.x_data)
+        errx_bot.set_xdata(self.x_data)
+        errx_top.set_ydata(self.y_data)
+        errx_bot.set_ydata(self.y_data)
+
+        new_segments_x = [np.array([[xt, y], [xb,y]]) for xt, xb, y in
+                    zip(self.x_data, self.x_data, self.y_data)]
+
+        new_segments_y = [np.array([[x, yt], [x,yb]]) for x, yt, yb in
+                    zip(self.x_data, yerr_top, yerr_bot)]
+
+        barsx.set_segments(new_segments_x)
+        barsy.set_segments(new_segments_y)
+
         # Rescale and redraw.
         self.ax.relim(visible_only=True)
         self.ax.autoscale_view(tight=True)
@@ -152,33 +176,3 @@ class LivePlotWithErrors(CallbackBase):
             print('LivePlot has a different number of elements for x ({}) and'
                   'y ({})'.format(len(self.x_data), len(self.y_data)))
         super().stop(doc)
-
-
-# class LivePlotWithErrors(LivePlot):
-#
-#     def start(self, doc):
-#         self.x_data, self.y_data, self.e_data = [], [], []
-#         label = " :: ".join(
-#             [str(doc.get(name, name)) for name in self.legend_keys])
-#         kwargs = ChainMap(self.kwargs, {'label': label})
-#         self.current_line = self.ax.errorbar([], [], yerr=[], **kwargs)
-#         self.lines.append(self.current_line)
-#         self.legend = self.ax.legend(
-#             loc=0, title=self.legend_title).draggable()
-#         super().start(doc)
-#
-#
-#     def update_caches(self, x, y):
-#         print("update_caches():",x,y)
-#         self.e_data.append(np.sqrt(y))
-#         super().update_caches(x,y)
-#
-#     def update_plot(self):
-#         adjustErrbarxy(self.current_line, self.x_data, self.y_data, None, self.e_data)
-#         # Rescale and redraw.
-#         self.ax.relim(visible_only=True)
-#         self.ax.autoscale_view(tight=True)
-#         self.ax.figure.canvas.draw_idle()
-
-# subscribe
-# gs.RE.subscribe('all', LivePlotWithErrors)

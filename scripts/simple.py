@@ -1,6 +1,7 @@
 
 # Simple sit and count for a period of time_plan
 RE(time_plan(60))
+RE(time_plan(10), sample_id='A', purpose='calibration', user='Stuart')
 
 # Simple sit and count for a given proton charge
 RE(pcharge_plan(0.01))

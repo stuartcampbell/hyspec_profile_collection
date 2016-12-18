@@ -27,11 +27,109 @@ def adjustErrbarxy(self, errobj, x, y, x_error, y_error):
     barsy.set_segments(new_segments_y)
 
 
-class LivePlotWithErrors(LivePlot):
 
-    def __init__(self, y, x=None, *, legend_keys=None, xlim=None, ylim=None,
-                 ax=None, fig=None, **kwargs):
-        super().__init__(y, **kwargs)
+class LivePlotE(CallbackBase):
+    """
+    Build a function that updates a plot from a stream of Events.
+    Note: If your figure blocks the main thread when you are trying to
+    scan with this callback, call `plt.ion()` in your IPython session.
+    Parameters
+    ----------
+    y : str
+        the name of a data field in an Event
+    x : str, optional
+        the name of a data field in an Event
+        If None, use the Event's sequence number.
+    legend_keys : list, optional
+        The list of keys to extract from the RunStart document and format
+        in the legend of the plot. The legend will always show the
+        scan_id followed by a colon ("1: ").  Each
+    xlim : tuple, optional
+        passed to Axes.set_xlim
+    ylim : tuple, optional
+        passed to Axes.set_ylim
+    fig : Figure, optional
+        matplotib Figure; if none specified, current figure (``plt.gcf()``)
+        is used.
+    All additional keyword arguments are passed through to ``Axes.plot``.
+    Examples
+    --------
+    >>> my_plotter = LivePlot('det', 'motor', legend_keys=['sample'])
+    >>> RE(my_scan, my_plotter)
+    """
+    def __init__(self, y, x=None, legend_keys=None, xlim=None, ylim=None,
+                 fig=None, **kwargs):
+        super().__init__()
+        if fig is None:
+            # overplot (or, if no fig exists, one is made)
+            fig = plt.gcf()
+
+        if legend_keys is None:
+            legend_keys = []
+        self.legend_keys = ['scan_id'] + legend_keys
+        if x is not None:
+            self.x, *others = _get_obj_fields([x])
+        else:
+            self.x = None
+        self.y, *others = _get_obj_fields([y])
+        self.fig = fig
+        self.ax = fig.gca()
+        self.ax.set_ylabel(y)
+        self.ax.set_xlabel(x or 'sequence #')
+        if xlim is not None:
+            self.ax.set_xlim(*xlim)
+        if ylim is not None:
+            self.ax.set_ylim(*ylim)
+        self.ax.margins(.1)
+        self.kwargs = kwargs
+        self.lines = []
+        self.legend = None
+        self.legend_title = " :: ".join([name for name in self.legend_keys])
+
+    def start(self, doc):
+        # The doc is not used; we just use the singal that a new run began.
+        self.x_data, self.y_data = [], []
+        label = " :: ".join(
+            [str(doc.get(name, ' ')) for name in self.legend_keys])
+        self.current_line, = self.ax.plot([], [], label=label, **self.kwargs)
+        self.lines.append(self.current_line)
+        self.legend = self.ax.legend(loc=0, title=self.legend_title).draggable()
+
+    def event(self, doc):
+        "Update line with data from this Event."
+        try:
+            if self.x is not None:
+                # this try/except block is needed because multiple event streams
+                # will be emitted by the RunEngine and not all event streams will
+                # have the keys we want
+                new_x = doc['data'][self.x]
+            else:
+                new_x = doc['seq_num']
+            new_y = doc['data'][self.y]
+        except KeyError:
+            # wrong event stream, skip it
+            return
+        self.y_data.append(new_y)
+        self.x_data.append(new_x)
+        self.current_line.set_data(self.x_data, self.y_data)
+        # Rescale and redraw.
+        self.ax.relim(visible_only=True)
+        self.ax.autoscale_view(tight=True)
+        self.ax.figure.canvas.draw_idle()
+
+    def stop(self, doc):
+        if not self.x_data:
+            print('LivePlot did not get any data that corresponds to the '
+                  'x axis. {}'.format(self.x))
+        if not self.y_data:
+            print('LivePlot did not get any data that corresponds to the '
+                    'y axis. {}'.format(self.y))
+        if len(self.y_data) != len(self.x_data):
+            print('LivePlot has a different number of elements for x ({}) and'
+                  'y ({})'.format(len(self.x_data), len(self.y_data)))
+
+
+class LivePlotWithErrors(LivePlot):
 
     def start(self, doc):
         self.x_data, self.y_data, self.e_data = [], [], []
@@ -46,6 +144,7 @@ class LivePlotWithErrors(LivePlot):
 
 
     def update_caches(self, x, y):
+        print("update_caches():",x,y)
         self.e_data.append(np.sqrt(y))
         super().update_caches(x,y)
 
@@ -55,3 +154,6 @@ class LivePlotWithErrors(LivePlot):
         self.ax.relim(visible_only=True)
         self.ax.autoscale_view(tight=True)
         self.ax.figure.canvas.draw_idle()
+
+# subscribe
+gs.RE.subscribe('all', LivePlotWithErrors)

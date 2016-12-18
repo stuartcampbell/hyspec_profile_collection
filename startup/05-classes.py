@@ -1,5 +1,7 @@
-from bluesky.callbacks import LivePlot, _get_obj_fields
+from bluesky.callbacks.core import LivePlot, _get_obj_fields
+import matplotlib.pyplot as plt
 import numpy as np
+
 
 def adjustErrbarxy(self, errobj, x, y, x_error, y_error):
     ln, (errx_top, errx_bot, erry_top, erry_bot), (barsx, barsy) = errobj

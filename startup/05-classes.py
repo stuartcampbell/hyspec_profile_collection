@@ -2,34 +2,6 @@ from bluesky.callbacks import LivePlot, _get_obj_fields
 import matplotlib.pyplot as plt
 import numpy as np
 
-
-def adjustErrbarY(self, errobj, x, y, y_error):
-    ln, (errx_top, errx_bot, erry_top, erry_bot), (barsx, barsy) = errobj
-    x_base = x
-    y_base = y
-
-    #xerr_top = x_base + x_error
-    #xerr_bot = x_base - x_error
-    yerr_top = y_base + y_error
-    yerr_bot = y_base - y_error
-
-    #errx_top.set_xdata(xerr_top)
-    #errx_bot.set_xdata(xerr_bot)
-    #errx_top.set_ydata(y_base)
-    #errx_bot.set_ydata(y_base)
-
-    erry_top.set_xdata(x_base)
-    erry_bot.set_xdata(x_base)
-    erry_top.set_ydata(yerr_top)
-    erry_bot.set_ydata(yerr_bot)
-
-    #new_segments_x = [np.array([[xt, y], [xb,y]]) for xt, xb, y in zip(xerr_top, xerr_bot, y_base)]
-    new_segments_y = [np.array([[x, yt], [x,yb]]) for x, yt, yb in zip(x_base, yerr_top, yerr_bot)]
-    #barsx.set_segments(new_segments_x)
-    barsy.set_segments(new_segments_y)
-
-
-
 class LivePlotWithErrors(CallbackBase):
     """
     Build a function that updates a plot from a stream of Events.
@@ -134,10 +106,12 @@ class LivePlotWithErrors(CallbackBase):
         self.e_data.append(np.sqrt(y))
 
     def update_plot(self):
-        # self.current_line.set_data(self.x_data, self.y_data)
-        #adjustErrbarY(self.current_line, self.x_data, self.y_data, self.e_data)
 
-        # 
+        # For now (as in for the HYSPEC test) I am just going to do something nasty
+        # and just plot everytime!
+        self.current_line = self.ax.errorbar(self.x_data, self.y_data, yerr=self.e_data)
+
+        #
         # try:
         #     line, (bottoms, tops), verts = self.current_line
         #     line.set_xdata(self.x_data)
@@ -146,11 +120,11 @@ class LivePlotWithErrors(CallbackBase):
         #     bottoms.set_ydata(self.y_data - self.e_data)
         #     tops.set_xdata(self.x_data)
         #     tops.set_ydaya(self.y_data + self.e_data)
+        #     # TODO: Still need to do something with the verts ?
         # except:
+        #     # If there 'verts' was None, then there was nothing plotted, for
+        #     # now lets just do an initial plot.
         #     self.current_line = self.ax.errorbar(self.x_data, self.y_data, yerr=self.e_data)
-
-        self.current_line = self.ax.errorbar(self.x_data, self.y_data, yerr=self.e_data)
-
 
         #
         #

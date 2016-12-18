@@ -1,4 +1,4 @@
-from bluesky.callbacks.core import LivePlot, _get_obj_fields
+from bluesky.callbacks import LivePlot, _get_obj_fields
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -158,4 +158,4 @@ class LivePlotWithErrors(LivePlot):
         self.ax.figure.canvas.draw_idle()
 
 # subscribe
-gs.RE.subscribe('all', LivePlotWithErrors)
+# gs.RE.subscribe('all', LivePlotWithErrors)

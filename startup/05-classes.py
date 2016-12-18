@@ -137,18 +137,19 @@ class LivePlotWithErrors(CallbackBase):
         # self.current_line.set_data(self.x_data, self.y_data)
         #adjustErrbarY(self.current_line, self.x_data, self.y_data, self.e_data)
 
+        # 
+        # try:
+        #     line, (bottoms, tops), verts = self.current_line
+        #     line.set_xdata(self.x_data)
+        #     line.set_ydata(self.y_data)
+        #     bottoms.set_xdata(self.x_data)
+        #     bottoms.set_ydata(self.y_data - self.e_data)
+        #     tops.set_xdata(self.x_data)
+        #     tops.set_ydaya(self.y_data + self.e_data)
+        # except:
+        #     self.current_line = self.ax.errorbar(self.x_data, self.y_data, yerr=self.e_data)
 
-        try:
-            line, (bottoms, tops), verts = self.current_line
-            line.set_xdata(self.x_data)
-            line.set_ydata(self.y_data)
-            bottoms.set_xdata(self.x_data)
-            bottoms.set_ydata(self.y_data - self.e_data)
-            tops.set_xdata(self.x_data)
-            tops.set_ydaya(self.y_data + self.e_data)
-        except:
-            self.current_line = self.ax.errorbar(self.x_data, self.y_data, yerr=self.e_data, **kwargs)
-
+        self.current_line = self.ax.errorbar(self.x_data, self.y_data, yerr=self.e_data)
 
 
         #

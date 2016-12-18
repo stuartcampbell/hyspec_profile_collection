@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def adjustErrbarxy(self, errobj, x, y, y_error):
+def adjustErrbarY(self, errobj, x, y, y_error):
     ln, (errx_top, errx_bot, erry_top, erry_bot), (barsx, barsy) = errobj
     x_base = x
     y_base = y
@@ -135,7 +135,7 @@ class LivePlotWithErrors(CallbackBase):
 
     def update_plot(self):
         # self.current_line.set_data(self.x_data, self.y_data)
-        adjustErrbarxy(self.current_line, self.x_data, self.y_data, self.e_data)
+        adjustErrbarY(self.current_line, self.x_data, self.y_data, self.e_data)
         # Rescale and redraw.
         self.ax.relim(visible_only=True)
         self.ax.autoscale_view(tight=True)

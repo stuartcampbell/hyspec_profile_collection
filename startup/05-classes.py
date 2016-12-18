@@ -137,7 +137,7 @@ class LivePlotWithErrors(CallbackBase):
         # self.current_line.set_data(self.x_data, self.y_data)
         #adjustErrbarY(self.current_line, self.x_data, self.y_data, self.e_data)
 
-        ln, (errx_top, errx_bot, erry_top, erry_bot), (barsx, barsy) = self.current_line
+        ln, (erry_top, erry_bot), (barsy) = self.current_line
         yerr_top = self.y_data + self.e_data
         yerr_bot = self.y_data - self.e_data
 
@@ -146,18 +146,9 @@ class LivePlotWithErrors(CallbackBase):
         erry_top.set_ydata(yerr_top)
         erry_bot.set_ydata(yerr_bot)
 
-        errx_top.set_xdata(self.x_data)
-        errx_bot.set_xdata(self.x_data)
-        errx_top.set_ydata(self.y_data)
-        errx_bot.set_ydata(self.y_data)
-
-        new_segments_x = [np.array([[xt, y], [xb,y]]) for xt, xb, y in
-                    zip(self.x_data, self.x_data, self.y_data)]
-
         new_segments_y = [np.array([[x, yt], [x,yb]]) for x, yt, yb in
                     zip(self.x_data, yerr_top, yerr_bot)]
 
-        barsx.set_segments(new_segments_x)
         barsy.set_segments(new_segments_y)
 
         # Rescale and redraw.

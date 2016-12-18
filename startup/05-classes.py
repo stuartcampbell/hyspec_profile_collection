@@ -106,8 +106,8 @@ class LivePlotWithErrors(CallbackBase):
         #self.current_line, = self.ax.plot([], [], **kwargs)
         self.current_line = self.ax.errorbar([], [], yerr=[], **kwargs)
         self.lines.append(self.current_line)
-        self.legend = self.ax.legend(
-            loc=0, title=self.legend_title).draggable()
+        #self.legend = self.ax.legend(
+        #    loc=0, title=self.legend_title).draggable()
         super().start(doc)
 
     def event(self, doc):

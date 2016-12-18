@@ -1,4 +1,4 @@
-from bluesky.callbacks import LivePlot
+from bluesky.callbacks import LivePlot, _get_obj_fields
 import numpy as np
 
 def adjustErrbarxy(self, errobj, x, y, x_error, y_error):

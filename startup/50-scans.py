@@ -63,14 +63,18 @@ def continuous_step_scan(mymotor, motor_min, motor_max,
     # Start
     yield from bp.kickoff(detector, wait=True)
     # and immediately pause
-    yield from abs_set(detector.pause, 1)
+    #yield from abs_set(detector.pause, 1)
+    yield from abs_set(detector.runcontrol_pause, 1)
+    
 
     for num in np.arange(motor_min, motor_max, motor_step):
         yield from abs_set(mymotor, num, wait=True)
         yield from abs_set(bs_adned_reset_counters, 1, wait=True)
-        yield from abs_set(detector.resume, 1, wait=True)
+        #yield from abs_set(detector.resume, 1, wait=True)
+        yield from abs_set(detector.runcontrol_resume, 1, wait=True)
         yield from bp.sleep(collection_time)
-        yield from abs_set(detector.pause, 1)
+        #yield from abs_set(detector.pause, 1)
+        yield from abs_set(detector.runcontrol_pause, 1)
 
     yield from bp.complete(detector, wait=True)
     yield from bp.collect(detector)

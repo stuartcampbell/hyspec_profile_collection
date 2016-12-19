@@ -3,7 +3,8 @@ from bluesky.plans import abs_set, trigger, read, run_decorator
 
 import numpy as np
 
-def waitfor_proton_charge(threshold):
+def _waitfor_proton_charge(threshold):
+
     """Set, trigger, read until the current reaches threshold"""
     i = 0
     while True:
@@ -16,6 +17,8 @@ def waitfor_proton_charge(threshold):
             break
         i += 1
 
+# manually do the decorating
+waitfor_proton_charge = run_decorator()(_waitfor_proton_charge)
 
 @run_decorator()
 def time_plan(collection_time):
@@ -30,7 +33,7 @@ def time_plan(collection_time):
 def pcharge_plan(pcharge):
     '''Plan to collection for a given beam current'''
     yield from bp.kickoff(detector, wait=True)
-    yield from waitfor_proton_charge(pcharge)
+    yield from _waitfor_proton_charge(pcharge)
     yield from bp.complete(detector, wait=True)
     yield from bp.collect(detector)
 

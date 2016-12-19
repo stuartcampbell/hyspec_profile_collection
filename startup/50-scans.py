@@ -31,7 +31,7 @@ def pcharge_plan(pcharge):
     '''Plan to collection for a given beam current'''
     yield from bp.kickoff(detector, wait=True)
     yield from waitfor_proton_charge(pcharge)
-    yield from bp.complete(etector, wait=True)
+    yield from bp.complete(detector, wait=True)
     yield from bp.collect(detector)
 
 

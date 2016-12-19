@@ -22,15 +22,17 @@ def _waitfor_proton_charge(threshold):
 # manually do the decorating
 waitfor_proton_charge = run_decorator()(_waitfor_proton_charge)
 
-@run_decorator()
-def time_plan(collection_time):
+
+def _time_plan(collection_time):
     '''Plan to collect for a period of time'''
     yield from bp.kickoff(detector, wait=True)
     yield from bp.sleep(collection_time)
     yield from bp.complete(detector, wait=True)
     yield from bp.collect(detector)
 
-
+# manually do the decorating
+time_plan = run_decorator()(_time_plan)
+    
 pcharge_plan = fly_during_decorator([detector])(waitfor_proton_charge)
 
 
@@ -39,7 +41,7 @@ def step_scan(mymotor, motor_min, motor_max, motor_step, collection_time):
     "Step mymotor from min -> max with a step size of step and collect for a given time"
     for num in np.arange(motor_min, motor_max, motor_step):
         yield from abs_set(mymotor, num, wait=True)
-        yield from time_plan(collection_time)
+        yield from _time_plan(collection_time)
 
 
 @run_decorator()

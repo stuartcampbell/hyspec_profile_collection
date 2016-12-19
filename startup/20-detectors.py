@@ -99,4 +99,4 @@ bs_neutrons_roi = EpicsSignalRO('BL14B:Det:Neutrons:ROI1', name='bs_neutrons_roi
 bs_bm2 = EpicsSignalRO('BL14B:Det:BM2', name='bs_bm2')
 
 # ADnED
-bs_adned_reset_counters = EpicsSignal('BL14B:Det:TOF:CompressProcAll.PROC')
+bs_adned_reset_counters = EpicsSignal('BL14B:Det:ADnED:ResetCounters')

@@ -1,9 +1,10 @@
 import bluesky.plans as bp
 from bluesky.plans import abs_set, trigger, read, run_decorator
 
-
+import numpy as np
 
 def _waitfor_proton_charge(threshold):
+
     """Set, trigger, read until the current reaches threshold"""
     i = 0
     while True:
@@ -40,7 +41,7 @@ def pcharge_plan(pcharge):
 @run_decorator()
 def step_scan(mymotor, motor_min, motor_max, motor_step, collection_time):
     "Step mymotor from min -> max with a step size of step and collect for a given time"
-    for num in range(motor_min, motor_max, motor_step):
+    for num in np.arange(motor_min, motor_max, motor_step):
         yield from abs_set(mymotor, num, wait=True)
         yield from time_plan(collection_time)
 
@@ -56,7 +57,7 @@ def continuous_step_scan(mymotor, motor_min, motor_max,
     # and immediately pause
     yield from bp.pause(detector, wait=True)
 
-    for num in range(motor_min, motor_max, motor_step):
+    for num in np.arange(motor_min, motor_max, motor_step):
         yield from abs_set(mymotor, num, wait=True)
         yield from abs_set(bs_adned_reset_counters, 1, wait=True)
         yield from bp.resume(detector, wait=True)

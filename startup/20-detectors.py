@@ -28,16 +28,16 @@ class NeutronDetector(Device):
         self.runcontrol_stateenum.subscribe(inner_cb)
 
         # Callback will not work with simulation run control
-        self.runcontrol_start.put(1)
-        #self.start_cmd.put(1,wait=True)
+        #self.runcontrol_start.put(1)
+        self.runcontrol_start.put(1, wait=True)
 
         return status
 
     def complete(self):
         print('complete():', self.name)
         # Callback will not work with simulation run control
-        self.runcontrol_stop.put(1)
-        #self.stop_cmd.put(1,wait=True)
+        # self.runcontrol_stop.put(1)
+        self.runcontrol_stop.put(1, wait=True)
         status = DeviceStatus(self)
         enums = self.runcontrol_stateenum.enum_strs
         def inner_cb(value, old_value, **kwargs):
@@ -50,25 +50,25 @@ class NeutronDetector(Device):
         self.runcontrol_stateenum.subscribe(inner_cb)
 
         # Callback will not work with simulation run control
-        self.runcontrol_stop.put(1)
-        #self.start_cmd.put(1,wait=True)
+        #self.runcontrol_stop.put(1)
+        self.runcontrol_stop.put(1, wait=True)
 
         return status
 
     def pause(self):
         # Callback will not work with simulation run control
-        self.runcontrol_pause.put(1)
-        #self.pause_cmd.put(1,wait=True)
+        #self.runcontrol_pause.put(1)
+        self.runcontrol_pause.put(1, wait=True)
 
     def resume(self):
         # Callback will not work with simulation run control
-        self.runcontrol_pause.put(0)
-        #self.pause_cmd.put(0,wait=True)
+        #self.runcontrol_pause.put(0)
+        self.runcontrol_pause.put(0, wait=True)
 
     def stop(self):
         # Callback will not work with simulation run control
-        self.runcontrol_stop.put(1)
-        #self.stop_cmd.put(1,wait=True)
+        #self.runcontrol_stop.put(1)
+        self.runcontrol_stop.put(1,wait=True)
 
     def collect(self):
         yield {'time': time.time(),

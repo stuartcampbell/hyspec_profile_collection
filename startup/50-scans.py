@@ -52,6 +52,7 @@ def step_scan_pcharge(mymotor, motor_min, motor_max, motor_step, pcharge):
         yield from _waitfor_proton_charge(pcharge)
         yield from bp.complete(detector, wait=True)
         yield from bp.collect(detector)
+        yield from bp.trigger_and_read([mymotor,bs_neutrons_roi,bs_pcharge])
 
 @run_decorator()
 def continuous_step_scan(mymotor, motor_min, motor_max,

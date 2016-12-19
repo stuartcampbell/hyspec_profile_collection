@@ -86,7 +86,7 @@ class NeutronDetector(Device):
         }
 
 
-detector = NeutronDetector('BL99', name='detector')
+detector = NeutronDetector('BL14B', name='detector')
 
 # Run Number
 bs_run_number = EpicsSignalRO('BL14B:CS:RunControl:RunNumber', name='bs_run_number')

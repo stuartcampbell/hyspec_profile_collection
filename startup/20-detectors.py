@@ -13,6 +13,9 @@ class NeutronDetector(Device):
     #runcontrol_state = Cpt(EpicsSignal, ':CS:RunControl:State')
     runcontrol_stateenum = Cpt(EpicsSignal, ':CS:RunControl:StateEnum')
 
+    runcontrol_lastrunnumber = Cpt(EpicsSignal, ':CS:RunControl:LastRunNumber')
+
+    
     def kickoff(self):
         #print('kickoff():', self.name)
         status = DeviceStatus(self)

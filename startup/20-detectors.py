@@ -49,10 +49,6 @@ class NeutronDetector(Device):
 
         self.runcontrol_stateenum.subscribe(inner_cb)
 
-        # Callback will not work with simulation run control
-        #self.runcontrol_stop.put(1)
-        self.runcontrol_stop.put(1, wait=True)
-
         return status
 
     def pause(self):

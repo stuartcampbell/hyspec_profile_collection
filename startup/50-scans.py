@@ -1,5 +1,7 @@
 import bluesky.plans as bp
-from bluesky.plans import abs_set, trigger, read, run_decorator, fly_during_wrapper
+
+from bluesky.plans import abs_set, trigger, read, run_decorator, fly_during_decorator
+
 
 import numpy as np
 
@@ -29,17 +31,7 @@ def time_plan(collection_time):
     yield from bp.collect(detector)
 
 
-def pcharge_plan(pcharge):
-    '''Plan to collection for a given beam current'''
-    yield from fly_during_wrapper(waitfor_proton_charge(pcharge), [detector])
-
-def pcharge_plan_old(pcharge):
-    yield from bp.kickoff(detector, wait=True)
-    yield from _waitfor_proton_charge(pcharge)
-    yield from bp.complete(detector, wait=True)
-    yield from bp.collect(detector)
-
-
+pcharge_plan = fly_during_decorator([detector])(waitfor_proton_charge)
 
 
 @run_decorator()

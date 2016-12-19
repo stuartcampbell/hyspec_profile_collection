@@ -8,9 +8,9 @@ from bluesky.examples import motor, det
 
 ## TODO : Update with realistic values for the steps, etc....
 
-RE(adaptive_scan([bs_neutrons_roi], 'bs_neutrons_roi', bs_axis1,
-                 start=-15,
-                 stop=10,
+RE(adaptive_scan([bs_neutrons_roi], 'bs_neutrons_roi', bs_s1,
+                 start=21,
+                 stop=25,
                  min_step=0.01,
                  max_step=5,
                  target_delta=.05,

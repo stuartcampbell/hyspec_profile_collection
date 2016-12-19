@@ -8,8 +8,8 @@ RE(pcharge_plan(0.01))
 
 # Step scan (separate file for each step)
 # args are (mymotor, min, max, step, collection_time)
-RE(step_scan(mymotor, 30.0, 40.0, 0.1, 10))
+RE(step_scan(bs_s1, 21.0, 25.0, 0.1, 10))
 
 # 'Continuous Step Scan' (One file for whole scan)
 # args are (mymotor, min, max, step, collection_time)
-RE(continuous_step_scan(mymotor, 30.0, 40.0, 0.1, 10))
+RE(continuous_step_scan(bs_s1, 21.0, 25.0, 0.1, 10))

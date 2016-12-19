@@ -14,13 +14,13 @@ class NeutronDetector(Device):
     runcontrol_stateenum = Cpt(EpicsSignal, ':CS:RunControl:StateEnum')
 
     def kickoff(self):
-        print('kickoff():', self.name)
+        #print('kickoff():', self.name)
         status = DeviceStatus(self)
 
         enums = self.runcontrol_stateenum.enum_strs
         def inner_cb(value, old_value, **kwargs):
             old_value, value = enums[int(old_value)], enums[int(value)]
-            print('kickoff():', old_value, value, time.time())
+            #print('kickoff():', old_value, value, time.time())
             if value == "Run":
                 status._finished(success=True)
                 self.runcontrol_stateenum.clear_sub(inner_cb)
@@ -34,7 +34,7 @@ class NeutronDetector(Device):
         return status
 
     def complete(self):
-        print('complete():', self.name)
+        #print('complete():', self.name)
         # Callback will not work with simulation run control
         # self.runcontrol_stop.put(1)
         self.runcontrol_stop.put(1, wait=True)
@@ -42,7 +42,7 @@ class NeutronDetector(Device):
         enums = self.runcontrol_stateenum.enum_strs
         def inner_cb(value, old_value, **kwargs):
             old_value, value = enums[int(old_value)], enums[int(value)]
-            print('complete():', kwargs['timestamp'], old_value, value, value == 'Idle')
+            #print('complete():', kwargs['timestamp'], old_value, value, value == 'Idle')
             if value == "Idle":
                 status._finished(success=True)
                 self.runcontrol_stateenum.clear_sub(inner_cb)

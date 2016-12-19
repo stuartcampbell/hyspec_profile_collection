@@ -43,6 +43,12 @@ def step_scan(mymotor, motor_min, motor_max, motor_step, collection_time):
         yield from abs_set(mymotor, num, wait=True)
         yield from _time_plan(collection_time)
 
+@run_decorator()
+def step_scan_pcharge(mymotor, motor_min, motor_max, motor_step, pcharge):
+    "Step mymotor from min -> max with a step size of step and collect for a given pcharge"
+    for num in np.arange(motor_min, motor_max, motor_step):
+        yield from abs_set(mymotor, num, wait=True)
+        yield from _waitfor_proton_charge(pcharge)
 
 @run_decorator()
 def continuous_step_scan(mymotor, motor_min, motor_max,

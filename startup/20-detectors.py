@@ -89,7 +89,8 @@ class NeutronDetector(Device):
 detector = NeutronDetector('BL14B', name='detector')
 
 # Run Number
-bs_run_number = EpicsSignalRO('BL14B:CS:RunControl:RunNumber', name='bs_run_number')
+bs_adara_run_number = EpicsSignalRO('BL14B:CS:RunControl:RunNumber', name='bs_adara_run_number')
+bs_run_number = EpicsSignalRO('BL14B:CS:RunControl:LastRunNumber', name='bs_run_number')
 
 # integrated proton charge for the run
 bs_pcharge = EpicsSignalRO('BL14B:Det:N1:PChargeIntegrated_RBV', name='bs_pcharge')

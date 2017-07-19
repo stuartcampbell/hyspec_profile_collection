@@ -1,0 +1,3 @@
+RE(count([bs_neutrons,bs_pcharge,bs_s1], num=15, delay=1), LiveTable([bs_s1,bs_neutrons,bs_pcharge]))
+
+RE(count([bs_neutrons], num=15, delay=1), LivePlot(bs_neutrons))

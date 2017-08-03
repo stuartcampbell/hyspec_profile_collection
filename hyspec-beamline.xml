@@ -1,0 +1,569 @@
+<!-- "Beamline" Configuration for SNS BL 14B
+  -->
+<beamline>
+    <info>
+        <name>BL14B</name>
+        <description>Hyspec</description>
+    </info>
+
+    <!-- Devices that are currently on the beam line -->
+    <devices>
+
+        <device active="false">
+            <name>bl14b-Televac</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-Televac</name>
+                <script>/home/controls/bl14b/applications/bl14b-Televac/iocBoot/iocbl14b-televac/st.cmd</script>
+                <console>5015</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>bl14b-SE-VacuumCube</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-SE-VacuumCube</name>
+                <script>/home/controls/bl14b/applications/bl14b-SE-VacuumCube/iocBoot/iocbl14b-SE-VacuumCube/st.cmd</script>
+                <console>5016</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>bl14b-SE-HeCompressor</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-SE-HeCompressor</name>
+                <script>/home/controls/bl14b/applications/bl14b-SE-HeCompressor/iocBoot/iocbl14b-SE-HeCompressor/st.cmd</script>
+                <console>5017</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>bl14b-IPTS</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-IPTS</name>
+                <script>/home/controls/bl14b/applications/bl14b-IPTS/iocBoot/IPTS/st.cmd</script>
+                <console>5018</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>bl14b-IPTS-ITEMS</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-IPTS-ITEMS</name>
+                <script>/home/controls/bl14b/applications/bl14b-IPTS/iocBoot/IPTS-ITEMS/st.cmd</script>
+                <console>5053</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>bl14b-ScanSupport</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-ScanSupport</name>
+                <script>/home/controls/bl14b/applications/bl14b-ScanSupport/iocBoot/bl14b-ScanSupport/st.cmd</script>
+                <console>5019</console>
+            </ioc>
+            <pv><name>BL14B:CS:Scan:Active</name></pv>
+        </device>
+
+        <device active="false">
+              <name>bl14b-SE-Dilfridge</name>
+              <ioc host="bl14b-dassrv1">
+                <name>bl14b-SE-Dilfridge</name>
+                <script>/home/controls/bl14b/applications/bl14b-SE-Dilfridge/iocBoot/iocbl14b-SE-Dilfridge/st.cmd</script>
+                <console>5020</console>
+            </ioc>
+            <pv><name>BL14B:SE:Dilfridge:Temperature8</name><alias>DF_Sample</alias></pv>
+            <pv><name>BL14B:SE:Dilfridge:Temperature5</name><alias>DF_RuO</alias></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-PPS</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-PPS</name>
+                <script>/home/controls/prod/bl14b/rel1.6_20151111/applications/bl14b-PPS/iocBoot/iocbl14b-PPS/st.cmd</script>
+                <console>5021</console>
+            </ioc>
+            <pv><name>BL14B:Mot:shutter:Position</name></pv>
+            <pv><name>BL14B:Mot:tertiary:Position</name></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-Parker1</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-Parker1</name>
+                <script>/home/controls/bl14b/applications/bl14b-Parker1/iocBoot/iocbl14b-Parker1/st.cmd</script>
+                <console>5022</console>
+            </ioc>
+            <pv><name>BL14B:Mot:s1</name></pv>
+            <pv><name>BL14B:Mot:s1.RBV</name><alias>s1</alias></pv>
+            <pv><name>BL14B:Mot:s1:Status</name></pv>
+            <pv><name>BL14B:Mot:s2</name></pv>
+            <pv><name>BL14B:Mot:s2:ProfibusEncoder</name><alias>s2</alias></pv>
+            <pv><name>BL14B:Mot:s2:Status</name></pv>
+            <pv><name>BL14B:Mot:msd</name></pv>
+            <pv><name>BL14B:Mot:msd.RBV</name><alias>msd</alias></pv>
+            <pv><name>BL14B:Mot:msd:Status</name></pv>
+            <pv><name>BL14B:Mot:vmel:Position</name></pv>
+            <pv><name>BL14B:Mot:a1l</name></pv>
+            <pv><name>BL14B:Mot:a1l.RBV</name></pv>
+            <pv><name>BL14B:Mot:a1l:Status</name></pv>
+            <pv><name>BL14B:Mot:a1t</name></pv>
+            <pv><name>BL14B:Mot:a1t.RBV</name></pv>
+            <pv><name>BL14B:Mot:a1t:Status</name></pv>
+            <pv><name>BL14B:Mot:a1b</name></pv>
+            <pv><name>BL14B:Mot:a1b.RBV</name></pv>
+            <pv><name>BL14B:Mot:a1b:Status</name></pv>
+            <pv><name>BL14B:Mot:a1r</name></pv>
+            <pv><name>BL14B:Mot:a1r.RBV</name></pv>
+            <pv><name>BL14B:Mot:a1r:Status</name></pv>
+            <pv><name>BL14B:Mot:a2l</name></pv>
+            <pv><name>BL14B:Mot:a2l.RBV</name></pv>
+            <pv><name>BL14B:Mot:a2l:Status</name></pv>
+            <pv><name>BL14B:Mot:a2t</name></pv>
+            <pv><name>BL14B:Mot:a2t.RBV</name></pv>
+            <pv><name>BL14B:Mot:a2t:Status</name></pv>
+            <pv><name>BL14B:Mot:a2b</name></pv>
+            <pv><name>BL14B:Mot:a2b.RBV</name></pv>
+            <pv><name>BL14B:Mot:a2b:Status</name></pv>
+            <pv><name>BL14B:Mot:a2r</name></pv>
+            <pv><name>BL14B:Mot:a2r.RBV</name></pv>
+            <pv><name>BL14B:Mot:a2r:Status</name></pv>
+            <pv><name>BL14B:Mot:mel</name></pv>
+            <pv><name>BL14B:Mot:mel.RBV</name></pv>
+            <pv><name>BL14B:Mot:mel:Status</name></pv>
+            <pv><name>BL14B:Mot:m1pg</name></pv>
+            <pv><name>BL14B:Mot:m1pg.RBV</name></pv>
+            <pv><name>BL14B:Mot:m1pg:Status</name></pv>
+            <pv><name>BL14B:Mot:mgpg</name></pv>
+            <pv><name>BL14B:Mot:mgpg.RBV</name></pv>
+            <pv><name>BL14B:Mot:mgpg:Status</name></pv>
+            <pv><name>BL14B:Mot:mtpg</name></pv>
+            <pv><name>BL14B:Mot:mtpg.RBV</name></pv>
+            <pv><name>BL14B:Mot:mtpg:Status</name></pv>
+            <pv><name>BL14B:Mot:mfpg</name></pv>
+            <pv><name>BL14B:Mot:mfpg.RBV</name></pv>
+            <pv><name>BL14B:Mot:mfpg:Status</name></pv>
+            <pv><name>BL14B:Mot:m1hu</name></pv>
+            <pv><name>BL14B:Mot:m1hu.RBV</name></pv>
+            <pv><name>BL14B:Mot:m1hu:Status</name></pv>
+            <pv><name>BL14B:Mot:mghu</name></pv>
+            <pv><name>BL14B:Mot:mghu.RBV</name></pv>
+            <pv><name>BL14B:Mot:mghu:Status</name></pv>
+            <pv><name>BL14B:Mot:mthu</name></pv>
+            <pv><name>BL14B:Mot:mthu.RBV</name></pv>
+            <pv><name>BL14B:Mot:mthu:Status</name></pv>
+            <pv><name>BL14B:Mot:mfhu</name></pv>
+            <pv><name>BL14B:Mot:mfhu.RBV</name></pv>
+            <pv><name>BL14B:Mot:mfhu:Status</name></pv>
+            <pv><name>BL14B:Mot:sgl</name></pv>
+            <pv><name>BL14B:Mot:sgl.RBV</name></pv>
+            <pv><name>BL14B:Mot:sgl:Status</name></pv>
+            <pv><name>BL14B:Mot:sgu</name></pv>
+            <pv><name>BL14B:Mot:sgu.RBV</name></pv>
+            <pv><name>BL14B:Mot:sgu:Status</name></pv>
+            <pv><name>BL14B:Mot:stl</name></pv>
+            <pv><name>BL14B:Mot:stl.RBV</name></pv>
+            <pv><name>BL14B:Mot:stl:Status</name></pv>
+            <pv><name>BL14B:Mot:stu</name></pv>
+            <pv><name>BL14B:Mot:stu.RBV</name></pv>
+            <pv><name>BL14B:Mot:stu:Status</name></pv>
+            <pv><name>BL14B:Mot:bst</name></pv>
+            <pv><name>BL14B:Mot:bst.RBV</name></pv>
+            <pv><name>BL14B:Mot:bst:Status</name></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-Energy</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-Energy</name>
+                <script>/home/controls/bl14b/applications/bl14b-Energy/iocBoot/bl14b-Energy/st.cmd</script>
+                <console>5023</console>
+            </ioc>
+            <pv><name>BL14B:CS:Energy:EiReq</name></pv>
+            <pv><name>BL14B:CS:Energy:Ei</name></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-EnergyTest</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-EnergyTest</name>
+                <script>/home/controls/bl14b/applications/bl14b-Energy/iocBoot/bl14b-EnergyTest/st.cmd</script>
+                <console>5024</console>
+            </ioc>
+        </device>
+        
+        <device active="true">
+            <name>bl14b-SE-AMI1800</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-SE-AMI1800</name>
+                <script>/home/controls/bl14b/applications/bl14b-SE-AMI1800/iocBoot/iocAMI1800/st.cmd</script>                
+                <console>5025</console>
+            </ioc>
+            <pv><name>BL14B:SE:AMI1800:LVL1</name><alias>LNLevel</alias></pv>
+            <pv><name>BL14B:SE:AMI1800:LVL2</name><alias>LHLevel</alias></pv>
+        </device> 
+
+        <device active="true">
+            <name>bl14b-Det-nED</name>
+            <ioc host="bl14b-daq1">
+                <name>bl14b-Det-nED</name>
+                <script>/home/controls/bl14b/applications/bl14b-Det-nED/iocBoot/iocbl14b-Det-nED/st.cmd</script>                
+                <console>5026</console>
+            </ioc>
+        </device> 
+
+        <device active="true">
+            <name>bl14b-Det-ADnED</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-Det-ADnED</name>
+                <script>/home/controls/bl14b/applications/bl14b-Det-ADnED/iocBoot/iocbl14b-Det-ADnED/st.cmd</script>
+                <console>5027</console>
+            </ioc>
+            <pv><name>BL14B:Det:N1:Det1:XY:ROI:1:MinX_RBV</name><alias>ROI1minX</alias></pv>
+            <pv><name>BL14B:Det:N1:Det1:XY:ROI:1:SizeX_RBV</name><alias>ROI1sizeX</alias></pv>
+            <pv><name>BL14B:Det:N1:Det1:XY:ROI:1:MinY_RBV</name><alias>ROI1minY</alias></pv>
+            <pv><name>BL14B:Det:N1:Det1:XY:ROI:1:SizeY_RBV</name><alias>ROI1sizeY</alias></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-Vac</name>
+            <ioc host="bl14b-dassrv1">
+                 <name>bl14b-Vac</name>
+                 <script>/home/controls/bl14b/applications/bl14b-Vac/iocBoot/iocVac/st.cmd</script>
+                 <console>5028</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>RunControl</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-RunControl</name>
+                <script>/home/controls/bl14b/applications/bl14b-RunControl/iocBoot/iocbl14b-RunControl/st.cmd</script>
+                <console>5029</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+           <name>Timing</name>
+           <ioc host="bl14b-dassrv1">
+           <name>bl14b-Timing</name>
+           <script>/home/controls/bl14b/applications/bl14b-Timing/iocBoot/iocbl14b-Timing/st.cmd</script>
+           <console>5030</console>
+           </ioc>
+           <pv><name>BL14B:Det:TH:BL:Frequency</name></pv>
+           <pv><name>BL14B:Det:TH:BL:Ei</name><alias>EnergyRequest</alias></pv>
+           <pv><name>BL14B:Det:TH:DlySamp:BasePath</name></pv>
+           <pv><name>BL14B:Det:TH:DlyDet:SegPath</name></pv>
+           <pv><name>BL14B:Det:TH:DlyDet:SegEi</name></pv>
+           <pv><name>BL14B:Det:TH:DSPT1:Frame</name></pv>
+           <pv><name>BL14B:Det:TH:DSPT1:TrigDelay</name></pv>
+           <pv><name>BL14B:Det:TH:DSPT2:Frame</name></pv>
+           <pv><name>BL14B:Det:TH:DSPT2:TrigDelay</name></pv>
+           <pv><name>BL14B:Det:TH:DlyBM1:BasePath</name></pv>
+           <pv><name>BL14B:Det:TH:BMBM1:BMDelay</name></pv>
+           <pv><name>BL14B:Det:TH:BMBM1:Frame</name></pv>
+           <pv><name>BL14B:Det:TH:DlyBM2:BasePath</name></pv>
+           <pv><name>BL14B:Det:TH:BMBM2:BMDelay</name></pv>
+           <pv><name>BL14B:Det:TH:BMBM2:Frame</name></pv>
+           <pv><name>BL14B:Det:TH:DlyBM3:BasePath</name></pv>
+           <pv><name>BL14B:Det:TH:BMBM3:BMDelay</name></pv>
+           <pv><name>BL14B:Det:TH:BMBM3:Frame</name></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-Parker2</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-Parker2</name>
+                <script>/home/controls/bl14b/applications/bl14b-Parker2/iocBoot/iocbl14b-Parker2/st.cmd</script>
+                <console>5031</console>
+            </ioc>
+            <pv><name>BL14B:Mot:Sample:Axis1</name></pv>
+            <pv><name>BL14B:Mot:Sample:Axis1.RBV</name></pv>
+            <pv><name>BL14B:Mot:Sample:Axis2</name></pv>
+            <pv><name>BL14B:Mot:Sample:Axis2.RBV</name></pv>
+            <pv><name>BL14B:Mot:phi</name><alias>phi</alias></pv>
+            <pv><name>BL14B:Mot:chi</name><alias>chi</alias></pv>
+            <pv><name>BL14B:Mot:omega</name><alias>omega</alias></pv>
+        </device>
+
+        <device active="true">
+            <name>Mezei</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-Pol-Agilent</name>
+                <script>/home/controls/bl14b/applications/bl14b-Pol-Agilent/iocBoot/iocbl14b-Pol-Agilent/st.cmd</script>
+                <console>5032</console>
+            </ioc>
+            <pv><name>BL14B:Pol:Mez1:Comp:State</name><alias>FlipOn</alias></pv>
+            <pv><name>BL14B:Pol:Mez1:Comp:Curr</name><alias>MzCompCrnt</alias></pv>
+            <pv><name>BL14B:Pol:Mez1:Flip:State</name></pv>
+            <pv><name>BL14B:Pol:Mez1:Flip:Curr</name><alias>MzFlipCrnt</alias></pv>
+            <pv><name>BL14B:Pol:Mez1:Guide:State</name></pv>
+            <pv><name>BL14B:Pol:Mez1:Guide:Curr</name><alias>MzGuidCrnt</alias></pv>
+            <pv><name>BL14B:Pol:Mez1:Z:State</name></pv>
+            <pv><name>BL14B:Pol:Mez1:Z:Curr</name><alias>MzZCrnt</alias></pv>
+        <pv><name>BL14B:SE:psda</name><alias>psda</alias></pv>
+        <pv><name>BL14B:SE:psr</name><alias>psr</alias></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-SkfChopper1</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-SkfChopper1</name>
+                <script>/home/controls/bl14b/applications/bl14b-SkfChopper/iocBoot/iocbl14b-SkfChopper/st-1.cmd</script>
+                <console>5033</console>
+            </ioc>
+            <pv><name>BL14B:Chop:Skf1:SpeedUserReq</name></pv>
+            <pv><name>BL14B:Chop:Skf1:SpeedSet</name></pv>
+            <pv><name>BL14B:Chop:Skf1:MotorSpeed</name><alias>T0Speed</alias></pv>
+            <pv><name>BL14B:Chop:Skf1:PhaseLocked</name></pv>
+            <pv><name>BL14B:Chop:Skf1:DriveError</name></pv>
+            <pv><name>BL14B:Chop:Skf1:PhaseAccuracy</name><alias>T0Phase</alias></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-SkfChopper2</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-SkfChopper2</name>
+                <script>/home/controls/bl14b/applications/bl14b-SkfChopper/iocBoot/iocbl14b-SkfChopper/st-2.cmd</script>
+                <console>5034</console>
+            </ioc>
+            <pv><name>BL14B:Chop:Skf2:SpeedUserReq</name></pv>
+            <pv><name>BL14B:Chop:Skf2:SpeedSet</name></pv>
+            <pv><name>BL14B:Chop:Skf2:MotorSpeed</name><alias>T1ASpeed</alias></pv>
+            <pv><name>BL14B:Chop:Skf2:PhaseLocked</name></pv>
+            <pv><name>BL14B:Chop:Skf2:DriveError</name></pv>
+            <pv><name>BL14B:Chop:Skf2:PhaseAccuracy</name><alias>T1APhase</alias></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-SkfChopper3</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-SkfChopper3</name>
+                <script>/home/controls/bl14b/applications/bl14b-SkfChopper/iocBoot/iocbl14b-SkfChopper/st-3.cmd</script>
+                <console>5035</console>
+            </ioc>
+            <pv><name>BL14B:Chop:Skf3:SpeedUserReq</name></pv>
+            <pv><name>BL14B:Chop:Skf3:SpeedSet</name></pv>
+            <pv><name>BL14B:Chop:Skf3:MotorSpeed</name><alias>T1BSpeed</alias></pv>
+            <pv><name>BL14B:Chop:Skf3:PhaseLocked</name></pv>
+            <pv><name>BL14B:Chop:Skf3:DriveError</name></pv>
+            <pv><name>BL14B:Chop:Skf3:PhaseAccuracy</name><alias>T1BPhase</alias></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-SkfChopper4</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-SkfChopper4</name>
+                <script>/home/controls/bl14b/applications/bl14b-SkfChopper/iocBoot/iocbl14b-SkfChopper/st-4.cmd</script>
+                <console>5036</console>
+            </ioc>
+            <pv><name>BL14B:Chop:Skf4:SpeedUserReq</name></pv>
+            <pv><name>BL14B:Chop:Skf4:SpeedSet</name></pv>
+            <pv><name>BL14B:Chop:Skf4:MotorSpeed</name><alias>FermiSpeed</alias></pv>
+            <pv><name>BL14B:Chop:Skf4:PhaseLocked</name></pv>
+            <pv><name>BL14B:Chop:Skf4:DriveError</name></pv>
+            <pv><name>BL14B:Chop:Skf4:PhaseAccuracy</name><alias>FermiPhase</alias></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-ChopScanAssist1</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-ChopScanAssist1</name>
+                <script>/home/controls/bl14b/applications/bl14b-SkfChopper/iocBoot/iocbl14b-SkfChopper/st-scanAssist-1.cmd</script>
+                <console>5037</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>bl14b-ChopScanAssist2</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-ChopScanAssist2</name>
+                <script>/home/controls/bl14b/applications/bl14b-SkfChopper/iocBoot/iocbl14b-SkfChopper/st-scanAssist-2.cmd</script>
+                <console>5038</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>bl14b-ChopScanAssist3</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-ChopScanAssist3</name>
+                <script>/home/controls/bl14b/applications/bl14b-SkfChopper/iocBoot/iocbl14b-SkfChopper/st-scanAssist-3.cmd</script>
+                <console>5039</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>bl14b-ChopScanAssist4</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-ChopScanAssist4</name>
+                <script>/home/controls/bl14b/applications/bl14b-SkfChopper/iocBoot/iocbl14b-SkfChopper/st-scanAssist-4.cmd</script>
+                <console>5040</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>Lakeshore 366/350</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-SE-Lakeshore</name>
+                <script>/home/controls/bl14b/applications/bl14b-SE-Lakeshore/iocBoot/iocbl14b-SE-Lakeshore/st.cmd</script>
+                <console>5041</console>
+            </ioc>
+            <pv><name>BL14B:SE:Lakeshore:SETP1</name></pv>
+            <pv><name>BL14B:SE:Lakeshore:SETP2</name></pv>
+            <pv><name>BL14B:SE:Lakeshore:SETP3</name></pv>
+            <pv><name>BL14B:SE:Lakeshore:SETP4</name></pv>
+            <pv><name>BL14B:SE:Lakeshore:KRDG0</name><alias>SensorA</alias></pv>
+            <pv><name>BL14B:SE:Lakeshore:KRDG1</name><alias>SensorB</alias></pv>
+            <pv><name>BL14B:SE:Lakeshore:KRDG2</name><alias>SensorC</alias></pv>
+            <pv><name>BL14B:SE:Lakeshore:KRDG3</name><alias>SensorD</alias></pv>
+            <pv><name>BL14B:SE:Lakeshore:SAMPLE_TEMP</name><alias>sampletemp</alias></pv>
+            <pv><name>BL14B:SE:Lakeshore:ALARM_SUMMARY</name></pv>
+        </device>
+
+        <device active="true">
+            <name>Status</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-Status</name>
+                <script>/home/controls/bl14b/applications/bl14b-Status/iocBoot/iocbl14b-Status/st.cmd</script>
+                <console>5042</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>bl14b-ChopEnvMon</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-ChopEnvMon</name>
+                <script>/home/controls/bl14b/applications/bl14b-EnvMon/iocBoot/iocbl14b-EnvMon/st.cmd</script>
+                <console>5043</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>bl14b-HighLevel</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-HighLevel</name>
+                <script>/home/controls/bl14b/applications/bl14b-HighLevel/iocBoot/iocbl14b-HighLevel/st.cmd</script>
+                <console>5044</console>
+            </ioc>
+            <pv><name>BL14B:CS:UBMatrix</name></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-AdaraMonitor</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-AdaraMonitor</name>
+                <script>/home/controls/bl14b/applications/bl14b-AdaraMonitor/iocBoot/AdaraMonitor/st.cmd</script>
+                <console>5045</console>
+            </ioc>
+        </device>
+
+    <device active="true">
+            <name>bl14b-cryostat</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-cryostat</name>
+                <script>/home/controls/bl14b/applications/bl14b-cryostat/iocBoot/iocbl14b-cryostat/st.cmd</script>
+                <console>5046</console>
+            </ioc>
+            <pv><name>BL14B:SE:Cryo:TempSetpointSet</name></pv>
+            <pv><name>BL14B:SE:Cryo:TempActual</name></pv>
+            <pv><name>BL14B:SE:Cryo:Pressure:PR1</name></pv>
+            <pv><name>BL14B:SE:Cryo:Pressure:PR2</name></pv>
+        </device>
+
+    <device active="true">
+            <name>bl14b-Pol-3DCoils</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-Pol-3DCoils</name>
+                <script>/home/controls/bl14b/applications/bl14b-Pol-3DCoils/iocBoot/iocbl14b-Pol-3DCoils/st.cmd</script>
+                <console>5047</console>
+            </ioc>
+            <pv><name>BL14B:Pol:3DCoils:PS1:Curr</name></pv>
+            <pv><name>BL14B:Pol:3DCoils:PS1:Volts</name></pv>
+            <pv><name>BL14B:Pol:3DCoils:PS2:Curr</name></pv>
+            <pv><name>BL14B:Pol:3DCoils:PS2:Volts</name></pv>
+            <pv><name>BL14B:Pol:3DCoils:PS3:Curr</name></pv>
+            <pv><name>BL14B:Pol:3DCoils:PS3:Volts</name></pv>
+            <pv><name>BL14B:Pol:3DCoils:PS4:Curr</name></pv>
+            <pv><name>BL14B:Pol:3DCoils:PS4:Volts</name></pv>
+            <pv><name>BL14B:Pol:3DCoils:PS5:Curr</name></pv>
+            <pv><name>BL14B:Pol:3DCoils:PS5:Volts</name></pv>
+        </device>
+        
+        <device active="true">
+        <name>bl14b-Det-Pwr</name>
+        <ioc host="bl14b-dassrv1">
+            <name>bl14b-Det_Pwr</name>
+            <script>/home/controls/bl14b/applications/bl14b-Det-Pwr/iocBoot/iocbl14b-Det-Pwr/st.cmd</script>
+                <console>5048</console>
+        </ioc>        
+        </device>  
+        
+        <device active="true">
+            <name>bl14b-PolCalc</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-PolCalc</name>
+                <script>/home/controls/bl14b/applications/bl14b-PolCalc/iocBoot/bl14b-PolCalc/st.cmd</script>
+                <console>5049</console>
+            </ioc>
+        </device>
+
+        <device active="false">
+            <name>bl14b-FitSam-Magnet</name>
+            <pv><name>BL14B:SE:GaussMeter:ReadField</name></pv>
+            <pv><name>BL14B:SE:FitSam:Temp1</name></pv>
+            <pv><name>BL14B:SE:FitSam:Temp2</name></pv>
+            <pv><name>BL14B:SE:FitSam:Temp4</name></pv>
+            <pv><name>BL14B:SE:FitSam:BathPressure</name></pv>
+            <pv><name>BL14B:SE:FitSam:HeLevel</name></pv>
+            <pv><name>BL14B:SE:FitSam:PersistentField</name></pv>
+            <pv><name>BL14B:SE:FitSam:FieldOutput</name></pv>
+            <pv><name>BL14B:SE:FitSam:SampleTempSP</name></pv>
+            <pv><name>BL14B:SE:FitSam:FieldSP</name></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-Sample-Global</name>
+            <pv><name>BL14B:SE:SelectSampleTemp</name></pv>
+            <pv><name>BL14B:SE:SampleTemp</name></pv>
+        </device>
+
+        <device active="false">
+            <name>bl14b-Beam-Power</name>
+            <pv><name>RTBT_Diag:BCM25I:Power60</name><alias>BeamPower</alias></pv>
+        </device>
+
+        <device active="true">
+            <name>bl14b-SE-GaussMeter</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-SE-GaussMeter</name>
+                <script>/home/controls/bl14b/applications/bl14b-SE-GaussMeter/iocBoot/iocGaussMeter/st.cmd</script>
+                <console>5050</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>bl14b-SE-SlimSam</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-SE-SlimSam</name>
+                <script>/home/controls/bl14b/applications/bl14b-SE-SlimSam/iocBoot/iocSlimSam/st.cmd</script>
+                <console>5051</console>
+            </ioc>
+        </device>
+
+        <device active="true">
+            <name>bl14b-SE-Furnace</name>
+            <ioc host="bl14b-dassrv1">
+                <name>bl14b-SE-Furnace</name>
+                <script>/home/controls/bl14b/applications/bl14b-SE-Furnace/iocBoot/iocbl14b-SE-Furnace/st.cmd</script>
+                <console>5052</console>
+            </ioc>
+            <pv><name>BL14B:SE:ND1:Loop1:SPSet</name></pv>
+            <pv><name>BL14B:SE:ND1:Loop1:Tolerance</name></pv>
+            <pv><name>BL14B:SE:ND1:CH1:PV</name></pv>
+        </device>
+
+
+
+    </devices>
+
+</beamline>
+
